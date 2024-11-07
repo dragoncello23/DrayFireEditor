@@ -3,11 +3,7 @@ workflows:
     name: iOS Workflow
     environment:
       xcode: latest
-      cocoapods: default # Se usi CocoaPods, altrimenti puoi ometterlo
     scripts:
-      - name: Install dependencies
-        script: |
-          pod install # Se usi CocoaPods, altrimenti puoi omettere questa riga
       - name: Build the app
         script: |
           xcodebuild -workspace DrayFireEditor.xcworkspace -scheme DrayFireEditor -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/DrayFireEditor.xcarchive archive

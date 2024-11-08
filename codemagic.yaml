@@ -4,13 +4,11 @@ workflows:
     environment:
       xcode: latest
     scripts:
-      - name: Build the app with Swift Package Manager
+      - name: Build the app with Xcode
         script: |
-          swift build -c release
-      - name: Export XCFramework
+          xcodebuild -workspace DrayFireEditor.xcworkspace -scheme DrayFireEditor -configuration Release -sdk iphoneos -archivePath $CM_BUILD_DIR/DrayFireEditor.xcarchive archive
+      - name: Export IPA
         script: |
-          xcodebuild -create-xcframework -framework .build/arm64-apple-ios16.0/DrayFireEditor.framework -output $CM_BUILD_DIR/DrayFireEditor.xcframework
+          xcodebuild -exportArchive -archivePath $CM_BUILD_DIR/DrayFireEditor.xcarchive -exportOptionsPlist exportOptions.plist -exportPath $CM_BUILD_DIR
     artifacts:
-      - $CM_BUILD_DIR/*.xcframework
-
-
+      - $CM_BUILD_DIR/*.ipa

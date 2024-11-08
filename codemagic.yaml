@@ -7,9 +7,10 @@ workflows:
       - name: Build the app with Swift Package Manager
         script: |
           swift build -c release
-      - name: Export IPA
+      - name: Export XCFramework
         script: |
-          xcodebuild -create-xcframework -framework ./build/release/DrayFireEditor.framework -output $CM_BUILD_DIR/DrayFireEditor.xcframework
+          xcodebuild -create-xcframework -framework .build/arm64-apple-ios16.0/DrayFireEditor.framework -output $CM_BUILD_DIR/DrayFireEditor.xcframework
     artifacts:
       - $CM_BUILD_DIR/*.xcframework
+
 
